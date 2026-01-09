@@ -3,56 +3,64 @@
 @tailwind utilities;
 
 /* 
- * Design System - Minimal Black & White SaaS Theme
- * Inspired by Linear, Vercel, and modern SaaS aesthetics
+ * Design System - College Event Organizer
+ * Clean black/white minimalist theme with academic feel
  * All colors in HSL format
  */
 
 @layer base {
   :root {
-    /* Core colors - Clean white foundation */
+    /* Core - Clean white foundation */
     --background: 0 0% 100%;
     --foreground: 0 0% 4%;
 
-    /* Cards with subtle warmth */
+    /* Cards */
     --card: 0 0% 100%;
     --card-foreground: 0 0% 4%;
 
-    /* Popover surfaces */
+    /* Popovers */
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 4%;
 
-    /* Primary - Pure black for maximum contrast */
-    --primary: 0 0% 4%;
+    /* Primary - Deep black for emphasis */
+    --primary: 0 0% 6%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Soft gray for subtle UI elements */
+    /* Secondary - Soft gray */
     --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 12%;
 
-    /* Muted - For backgrounds and less prominent elements */
+    /* Muted */
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
 
-    /* Accent - Subtle highlight */
+    /* Accent */
     --accent: 0 0% 96%;
     --accent-foreground: 0 0% 4%;
 
-    /* Destructive - Error states */
+    /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Success state */
+    /* Success */
     --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
 
-    /* Border and input styling */
+    /* Warning */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    /* Info */
+    --info: 217 91% 60%;
+    --info-foreground: 0 0% 100%;
+
+    /* Border and input */
     --border: 0 0% 90%;
     --input: 0 0% 90%;
     --ring: 0 0% 4%;
 
-    /* Radius for modern look */
-    --radius: 0.625rem;
+    /* Radius */
+    --radius: 0.75rem;
 
     /* Sidebar */
     --sidebar-background: 0 0% 98%;
@@ -64,49 +72,40 @@
     --sidebar-border: 0 0% 91%;
     --sidebar-ring: 0 0% 60%;
 
-    /* Custom gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 4%) 0%, hsl(0 0% 20%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(0 0% 98%) 100%);
-    
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
     --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
     --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -4px hsl(0 0% 0% / 0.1);
-    --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.08), 0 1px 2px -1px hsl(0 0% 0% / 0.08);
+    --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.06), 0 1px 2px -1px hsl(0 0% 0% / 0.06);
+    --shadow-card-hover: 0 10px 20px -5px hsl(0 0% 0% / 0.12), 0 4px 8px -4px hsl(0 0% 0% / 0.08);
   }
 
   .dark {
     --background: 0 0% 4%;
     --foreground: 0 0% 98%;
-
     --card: 0 0% 7%;
     --card-foreground: 0 0% 98%;
-
     --popover: 0 0% 7%;
     --popover-foreground: 0 0% 98%;
-
     --primary: 0 0% 98%;
     --primary-foreground: 0 0% 4%;
-
     --secondary: 0 0% 14%;
     --secondary-foreground: 0 0% 98%;
-
     --muted: 0 0% 14%;
     --muted-foreground: 0 0% 64%;
-
     --accent: 0 0% 14%;
     --accent-foreground: 0 0% 98%;
-
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
-
     --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
-
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --info: 217 91% 60%;
+    --info-foreground: 0 0% 100%;
     --border: 0 0% 18%;
     --input: 0 0% 18%;
     --ring: 0 0% 83%;
-
     --sidebar-background: 0 0% 6%;
     --sidebar-foreground: 0 0% 95%;
     --sidebar-primary: 224 76% 48%;
@@ -115,8 +114,6 @@
     --sidebar-accent-foreground: 0 0% 95%;
     --sidebar-border: 0 0% 12%;
     --sidebar-ring: 0 0% 60%;
-
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 98%) 0%, hsl(0 0% 80%) 100%);
   }
 }
 
@@ -130,28 +127,18 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
   }
 }
 
 @layer utilities {
-  /* Text balance for headings */
   .text-balance {
     text-wrap: balance;
   }
-
-  /* Gradient text utility */
-  .gradient-text {
-    background: var(--gradient-hero);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
 }
 
-/* Custom animations */
+/* Animations */
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -164,12 +151,8 @@
 }
 
 @keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes scale-in {
@@ -183,11 +166,18 @@
   }
 }
 
-@keyframes slide-in-right {
+@keyframes slide-up {
   from {
-    transform: translateX(100%);
+    opacity: 0;
+    transform: translateY(10px);
   }
   to {
-    transform: translateX(0);
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }

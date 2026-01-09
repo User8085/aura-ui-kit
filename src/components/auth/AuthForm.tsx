@@ -1,13 +1,13 @@
 /**
  * AuthForm Component
  * 
- * Reusable authentication form for login and signup.
+ * Reusable form for login and signup with role selection.
  * Includes validation and error handling.
  */
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2, User, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,12 +22,14 @@ export interface AuthFormData {
   name?: string;
   email: string;
   password: string;
+  role?: "organizer" | "student";
 }
 
 interface FormErrors {
   name?: string;
   email?: string;
   password?: string;
+  role?: string;
   general?: string;
 }
 
@@ -36,6 +38,7 @@ export function AuthForm({ mode, onSubmit }: AuthFormProps) {
     name: "",
     email: "",
     password: "",
+    role: undefined,
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [showPassword, setShowPassword] = useState(false);
@@ -43,7 +46,6 @@ export function AuthForm({ mode, onSubmit }: AuthFormProps) {
 
   const isLogin = mode === "login";
 
-  // Validate form fields
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
@@ -61,6 +63,10 @@ export function AuthForm({ mode, onSubmit }: AuthFormProps) {
       newErrors.password = "Password is required";
     } else if (formData.password.length < 8) {
       newErrors.password = "Password must be at least 8 characters";
+    }
+
+    if (!isLogin && !formData.role) {
+      newErrors.role = "Please select a role";
     }
 
     setErrors(newErrors);
@@ -90,18 +96,64 @@ export function AuthForm({ mode, onSubmit }: AuthFormProps) {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setFormData((prev) => ({ ...prev, [field]: e.target.value }));
-    // Clear error when user starts typing
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
   };
 
+  const selectRole = (role: "organizer" | "student") => {
+    setFormData((prev) => ({ ...prev, role }));
+    if (errors.role) {
+      setErrors((prev) => ({ ...prev, role: undefined }));
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* General error message */}
+      {/* General error */}
       {errors.general && (
         <div className="rounded-lg bg-destructive/10 p-4 text-sm text-destructive">
           {errors.general}
+        </div>
+      )}
+
+      {/* Role selection (signup only) */}
+      {!isLogin && (
+        <div className="space-y-3">
+          <Label>I am a</Label>
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              type="button"
+              onClick={() => selectRole("student")}
+              className={cn(
+                "flex flex-col items-center gap-2 rounded-xl border-2 p-4 transition-all",
+                formData.role === "student"
+                  ? "border-primary bg-primary/5"
+                  : "border-border hover:border-muted-foreground/50"
+              )}
+            >
+              <User className="h-6 w-6" />
+              <span className="font-medium">Student</span>
+              <span className="text-xs text-muted-foreground">Browse & register</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => selectRole("organizer")}
+              className={cn(
+                "flex flex-col items-center gap-2 rounded-xl border-2 p-4 transition-all",
+                formData.role === "organizer"
+                  ? "border-primary bg-primary/5"
+                  : "border-border hover:border-muted-foreground/50"
+              )}
+            >
+              <Users className="h-6 w-6" />
+              <span className="font-medium">Organizer</span>
+              <span className="text-xs text-muted-foreground">Create & manage</span>
+            </button>
+          </div>
+          {errors.role && (
+            <p className="text-sm text-destructive">{errors.role}</p>
+          )}
         </div>
       )}
 
@@ -130,7 +182,7 @@ export function AuthForm({ mode, onSubmit }: AuthFormProps) {
         <Input
           id="email"
           type="email"
-          placeholder="you@example.com"
+          placeholder="you@college.edu"
           value={formData.email}
           onChange={handleChange("email")}
           className={cn(errors.email && "border-destructive")}

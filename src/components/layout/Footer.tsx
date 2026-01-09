@@ -1,25 +1,26 @@
 /**
  * Footer Component
  * 
- * Minimal footer with links and copyright.
+ * Minimal footer for College Event Organizer.
  */
 
 import { Link } from "react-router-dom";
+import { Calendar } from "lucide-react";
 
 const footerLinks = {
-  product: [
-    { label: "Features", href: "#" },
-    { label: "Pricing", href: "#" },
-    { label: "Security", href: "#" },
+  platform: [
+    { label: "Browse Events", href: "/student-dashboard" },
+    { label: "Create Event", href: "/organizer-dashboard" },
+    { label: "How it Works", href: "#" },
   ],
-  company: [
-    { label: "About", href: "#" },
-    { label: "Blog", href: "#" },
-    { label: "Careers", href: "#" },
+  support: [
+    { label: "Help Center", href: "#" },
+    { label: "Contact Us", href: "#" },
+    { label: "FAQs", href: "#" },
   ],
   legal: [
-    { label: "Privacy", href: "#" },
-    { label: "Terms", href: "#" },
+    { label: "Privacy Policy", href: "#" },
+    { label: "Terms of Service", href: "#" },
   ],
 };
 
@@ -31,19 +32,21 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <Link to="/" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary" />
-              <span className="text-xl font-semibold tracking-tight">Acme</span>
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
+                <Calendar className="h-5 w-5 text-primary-foreground" />
+              </div>
+              <span className="text-xl font-bold tracking-tight">CampusEvents</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
-              Build better products faster with our modern platform.
+              Connecting students with amazing campus events. Discover, register, and never miss out.
             </p>
           </div>
 
           {/* Links */}
           <div>
-            <h4 className="mb-4 text-sm font-semibold">Product</h4>
+            <h4 className="mb-4 text-sm font-semibold">Platform</h4>
             <ul className="space-y-3">
-              {footerLinks.product.map((link) => (
+              {footerLinks.platform.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
@@ -57,9 +60,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 text-sm font-semibold">Company</h4>
+            <h4 className="mb-4 text-sm font-semibold">Support</h4>
             <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
+              {footerLinks.support.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
@@ -92,7 +95,7 @@ export function Footer() {
         {/* Copyright */}
         <div className="mt-12 border-t border-border pt-8">
           <p className="text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Acme Inc. All rights reserved.
+            © {new Date().getFullYear()} CampusEvents. All rights reserved.
           </p>
         </div>
       </div>
